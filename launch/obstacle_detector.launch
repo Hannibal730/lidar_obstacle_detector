@@ -1,0 +1,28 @@
+<launch>
+  <node pkg="lidar_obstacle_detector" type="obstacle_detector_node" name="obstacle_detector_node" output="screen">
+    <!-- 필수 토픽 파라미터 -->
+    <param name="lidar_points_topic" value="/velodyne_points" />
+    <param name="cloud_ground_topic" value="/ground_removed_points" />
+    <param name="cloud_clusters_topic" value="/cloud_clusters" />
+    <param name="jsk_bboxes_topic" value="/jsk_bboxes" />
+    <param name="autoware_objects_topic" value="/autoware_objects" />
+    <param name="bbox_target_frame" value="base_link" />
+
+    <!-- 사용자 설정 가능 파라미터 (m)-->
+    <param name="use_pca_box" value="true" /> <!-- PCA 기반 바운딩 박스 사용 여부 -->
+    <param name="use_tracking" value="true" /> <!-- 장애물 추적 활성화 여부 -->
+    <param name="voxel_grid_size" value="0.02" /> <!-- 다운샘플링 크기 -->
+    <param name="roi_max_x" value="5.0" /> <!-- ROI 최대 X 범위 -->
+    <param name="roi_max_y" value="1.0" /> <!-- ROI 최대 Y 범위 -->
+    <param name="roi_max_z" value="2.0" /> <!-- ROI 최대 Z 범위 -->
+    <param name="roi_min_x" value="0.0" /> <!-- ROI 최소 X 범위 -->
+    <param name="roi_min_y" value="-1.0" /> <!-- ROI 최소 Y 범위 -->
+    <param name="roi_min_z" value="-2.0" /> <!-- ROI 최소 Z 범위 -->
+    <param name="ground_threshold" value="0.06" /> <!-- RANSASC 임계값 -->
+    <param name="cluster_threshold" value="0.6" /> <!-- 클러스터링 거리 임계값 -->
+    <param name="cluster_max_size" value="200" /> <!-- 클러스터 최대 크기 -->
+    <param name="cluster_min_size" value="30" /> <!-- 클러스터 최소 크기. more than3 when using with PCA-->
+    <param name="displacement_threshold" value="1.0" /> <!-- 추적 중 이동 임계값 -->
+    <param name="iou_threshold" value="1.0" /> <!-- 추적 중 IoU 임계값 -->
+  </node>
+</launch>
